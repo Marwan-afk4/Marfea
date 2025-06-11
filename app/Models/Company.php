@@ -28,7 +28,12 @@ class Company extends Model
         'status'
     ];
 
-    public $timestamps = true;
+    public $timestamps = false;
+
+    protected $hidden = [
+        'created_at',
+        'updated_at'
+    ];
 
     protected $appends =[
         'image_link',

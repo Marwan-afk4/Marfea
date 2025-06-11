@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CompanySpecialization extends Model
+class Zone extends Model
 {
     use HasFactory;
 
-    protected $table = 'company_specializations';
+    protected $table = 'zones';
 
     protected $fillable = [
-        'company_id',
-        'specialization_name',
+        'city_id',
+        'name',
         'status'
     ];
 
@@ -25,9 +25,9 @@ class CompanySpecialization extends Model
     ];
 
 
-    public function company()
+    public function city()
     {
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(City::class);
     }
 
 }

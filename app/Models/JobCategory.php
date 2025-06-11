@@ -5,15 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CompanySpecialization extends Model
+class JobCategory extends Model
 {
     use HasFactory;
 
-    protected $table = 'company_specializations';
+    protected $table = 'job_categories';
 
     protected $fillable = [
-        'company_id',
-        'specialization_name',
+        'name',
         'status'
     ];
 
@@ -24,10 +23,5 @@ class CompanySpecialization extends Model
         'updated_at'
     ];
 
-
-    public function company()
-    {
-        return $this->belongsTo(Company::class);
-    }
 
 }

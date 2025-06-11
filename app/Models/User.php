@@ -31,11 +31,13 @@ class User extends Model
         'specialization'
     ];
 
-    public $timestamps = true;
+    public $timestamps = false;
+
 
     protected $hidden = [
         'password',
         'remember_token',
+        'updated_at'
     ];
 
     protected $appends = [
