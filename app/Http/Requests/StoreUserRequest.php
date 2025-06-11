@@ -15,34 +15,43 @@ class StoreUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-            'phone' => 'required',
-            'email_code' => 'required',
-            'email_verified' => 'required',
-            'image' => 'required',
-            'status' => 'required',
-            'role' => 'required',
-            'id_token' => 'required'
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:8',
+            'phone' => 'required|string|unique:users,phone',
+            // 'email_code' => 'required',
+            // 'email_verified' => 'required',
+            'image' => 'nullable',
+            'status' => 'required|in:active,inactive',
+            // 'role' => 'required',
+            // 'id_token' => 'required',
+            'specialization'=>'required',
+            'company_id'=>'required|exists:companies,id'
         ];
     }
 
     public function messages()
     {
         return [
-            'first_name.required' => __('The First Name field is required.'),
-            'last_name.required' => __('The Last Name field is required.'),
-            'email.required' => __('The Email field is required.'),
-            'password.required' => __('The Password field is required.'),
-            'phone.required' => __('The Phone field is required.'),
-            'email_code.required' => __('The Email Code field is required.'),
-            'email_verified.required' => __('The Email Verified field is required.'),
-            'image.required' => __('The Image field is required.'),
-            'status.required' => __('The Status field is required.'),
-            'role.required' => __('The Role field is required.'),
-            'id_token.required' => __('The Id Token field is required.')
+            'first_name.required' => 'The first name is required.',
+            'last_name.required' => 'The last name is required.',
+            'email.required' => 'The email is required.',
+            'password.required' => 'The password is required.',
+            'phone.required' => 'The phone number is required.',
+            'image.required' => 'The image is required.',
+            'status.required' => 'The status is required.',
+            'specialization.required' => 'The specialization is required.',
+            'company_id.required' => 'The company id is required.',
+            'company_id.exists' => 'The company id does not exist.',
+            'email.unique' => 'The email has already been taken.',
+            'phone.unique' => 'The phone number has already been taken.',
+            'phone.numeric' => 'The phone number must be a numeric value.',
+            'email.email' => 'The email must be a valid email address.',
+            'password.min' => 'The password must be at least 8 characters.',
+            'status.in' => 'The status must be active or inactive.',
+            'first_name.string' => 'The first name must be a string.',
+            'last_name.string' => 'The last name must be a string.',
         ];
     }
 

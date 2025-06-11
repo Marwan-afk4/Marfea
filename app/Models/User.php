@@ -27,7 +27,8 @@ class User extends Model
         'status',
         'role',
         'id_token',
-        'company_id'
+        'company_id',
+        'specialization'
     ];
 
     public $timestamps = true;
