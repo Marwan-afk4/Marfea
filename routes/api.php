@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Api\Admin\CityController;
+use App\Http\Controllers\Api\Admin\CompanyController;
 use App\Http\Controllers\Api\Admin\CountryController;
 use App\Http\Controllers\Api\Admin\JobCetgoryController;
+use App\Http\Controllers\Api\Admin\SpecializationController;
 use App\Http\Controllers\Api\Admin\UserController;
 use App\Http\Controllers\Api\Admin\ZoneController;
 use App\Http\Controllers\Api\Auth\AuthController;
@@ -47,4 +49,16 @@ Route::middleware(['auth:sanctum','IsAdmin'])->group(function () {
     Route::post('/admin/addJobCategory',[JobCetgoryController::class,'addJobCategory']);
     Route::put('/admin/editJobCategory/{id}',[JobCetgoryController::class,'updateJobCategory']);
     Route::delete('/admin/deleteJobCategory/{id}',[JobCetgoryController::class,'deleteJobCategory']);
+
+//company
+    Route::get('/admin/getCompanies',[CompanyController::class,'getCompanies']);
+    Route::post('/admin/addCompany',[CompanyController::class,'addCompany']);
+    Route::put('/admin/editCompany/{id}',[CompanyController::class,'updateCompany']);
+    Route::delete('/admin/deleteCompany/{id}',[CompanyController::class,'deleteCompany']);
+
+//specialization
+    Route::get('/admin/getSpecializations',[SpecializationController::class,'getSpecializations']);
+    Route::post('/admin/addSpecialization',[SpecializationController::class,'addSpecialization']);
+    Route::put('/admin/editSpecialization/{id}',[SpecializationController::class,'updateSpecialization']);
+    Route::delete('/admin/deleteSpecialization/{id}',[SpecializationController::class,'deleteSpecialization']);
 });

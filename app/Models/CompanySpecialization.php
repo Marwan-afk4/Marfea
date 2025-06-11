@@ -13,7 +13,7 @@ class CompanySpecialization extends Model
 
     protected $fillable = [
         'company_id',
-        'specialization_name',
+        'specialization_id',
         'status'
     ];
 
