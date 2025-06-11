@@ -25,7 +25,8 @@ class Company extends Model
         'facebook_link',
         'twitter_link',
         'linkedin_link',
-        'status'
+        'status',
+        'type',
     ];
 
     public $timestamps = false;
