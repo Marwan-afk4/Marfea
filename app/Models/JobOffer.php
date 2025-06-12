@@ -31,6 +31,15 @@ class JobOffer extends Model
 
     public $timestamps = false;
 
+    protected $appends =[
+        'image_link',
+    ];
+
+    public function getImageLinkAttribute()
+    {
+        return $this->image ? asset('storage/' . $this->image) : null;
+    }
+
 
     public function company()
     {

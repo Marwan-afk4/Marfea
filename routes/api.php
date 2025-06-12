@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\Admin\CityController;
 use App\Http\Controllers\Api\Admin\CompanyController;
 use App\Http\Controllers\Api\Admin\CountryController;
 use App\Http\Controllers\Api\Admin\JobCetgoryController;
+use App\Http\Controllers\Api\Admin\JobOfferController;
 use App\Http\Controllers\Api\Admin\SpecializationController;
 use App\Http\Controllers\Api\Admin\UserController;
 use App\Http\Controllers\Api\Admin\ZoneController;
@@ -61,4 +62,10 @@ Route::middleware(['auth:sanctum','IsAdmin'])->group(function () {
     Route::post('/admin/addSpecialization',[SpecializationController::class,'addSpecialization']);
     Route::put('/admin/editSpecialization/{id}',[SpecializationController::class,'updateSpecialization']);
     Route::delete('/admin/deleteSpecialization/{id}',[SpecializationController::class,'deleteSpecialization']);
+
+//JobOffer
+    Route::get('/admin/getJobs',[JobOfferController::class,'getJobs']);
+    Route::post('/admin/addJob',[JobOfferController::class,'addJob']);
+    Route::put('/admin/editJob/{id}',[JobOfferController::class,'editJob']);
+    Route::delete('/admin/deleteJob/{id}',[JobOfferController::class,'deleteJob']);
 });
