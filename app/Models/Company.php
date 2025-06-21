@@ -56,4 +56,9 @@ class Company extends Model
         return $this->hasMany(CompanySpecialization::class);
     }
 
+    public function jobOffers()
+    {
+        return $this->hasMany(JobOffer::class);
+    }
+
 }

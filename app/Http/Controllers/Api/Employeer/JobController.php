@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Admin;
+namespace App\Http\Controllers\Api\Employeer;
 
 use App\Http\Controllers\Controller;
 use App\Models\JobOffer;
@@ -8,36 +8,51 @@ use App\trait\ImageUpload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class JobOfferController extends Controller
+class JobController extends Controller
 {
-
     use ImageUpload;
 
-    public function getJobs()
+
+    public function getJobs(Request $request)
     {
+        $user = $request->user();
+        $company = $user->companies()->first();
+
         $jobs = JobOffer::with([
             'company:id,name,email,phone',
-            'jobCategory', 'city:id,name,country_id',
+            'jobCategory',
+            'city:id,name,country_id',
             'zone:id,name,city_id'
-            ])
-            ->get();
-
-        return response()->json(['jobs'=>$jobs]);
+        ])
+        ->where('company_id', $company->id)
+        ->get();
+        return response()->json(['jobs' => $jobs]);
     }
 
-    public function addJob(Request $request)
+
+    public function addNewJob(Request $request)
     {
+        $user = $request->user();
+        $company = $user->companies()->first();
+
+        if (!$company) {
+            return response()->json(['error' => 'Company not found'], 404);
+        }
+
+        if ($company->status !== 'active') {
+            return response()->json(['error' => 'Company is not active'], 403);
+        }
+
         $validation = Validator::make($request->all(), [
-            'company_id' => 'required|exists:companies,id',
             'job_category_id' => 'required|exists:job_categories,id',
             'city_id' => 'required|exists:cities,id',
             'zone_id' => 'required|exists:zones,id',
             'title' => 'required',
             'description' => 'required',
             'qualifications' => 'nullable',
-            'image'=>'nullable',
+            'image' => 'nullable',
             'type' => 'required|in:full_time,part_time,freelance,hybrid,internship',
-            'experience'=> 'required|in:fresh,junior,mid,+1 year,+2 years,+3 years,senior',
+            'experience' => 'required|in:fresh,junior,mid,+1 year,+2 years,+3 years,senior',
             'status' => 'required|in:active,inactive',
             'expected_salary' => 'required|numeric',
             'expire_date' => 'required|date',
@@ -45,11 +60,11 @@ class JobOfferController extends Controller
         ]);
 
         if ($validation->fails()) {
-            return response()->json(['errors'=>$validation->errors()]);
+            return response()->json(['errors' => $validation->errors()]);
         }
 
         $job = JobOffer::create([
-            'company_id' => $request->company_id ?? null,
+            'company_id' => $company->id,
             'job_category_id' => $request->job_category_id ?? null,
             'city_id' => $request->city_id ?? null,
             'zone_id' => $request->zone_id ?? null,
@@ -73,12 +88,24 @@ class JobOfferController extends Controller
         );
     }
 
+    public function deleteJob(Request $request, $id)
+    {
+        $job = JobOffer::find($id);
+
+        if (!$job) {
+            return response()->json(['error' => 'Job not found'], 404);
+        }
+
+        $job->delete();
+
+        return response()->json(['message' => 'Job deleted successfully']);
+    }
+
 
     public function editJob(Request $request,$id)
     {
         $job = JobOffer::find($id);
         $validation = Validator::make($request->all(), [
-            'company_id' => 'nullable|exists:companies,id',
             'job_category_id' => 'nullable|exists:job_categories,id',
             'city_id' => 'nullable|exists:cities,id',
             'zone_id' => 'nullable|exists:zones,id',
@@ -99,7 +126,6 @@ class JobOfferController extends Controller
         }
 
         $job->update([
-            'company_id' => $request->company_id ?? $job->company_id,
             'job_category_id' => $request->job_category_id ?? $job->job_category_id,
             'city_id' => $request->city_id ?? $job->city_id,
             'zone_id' => $request->zone_id ?? $job->zone_id,
@@ -118,15 +144,7 @@ class JobOfferController extends Controller
         return response()->json(
             [
                 'message' => 'Job updated successfully',
+                'job'=> $job,
             ]);
-    }
-
-
-    public function deleteJob($id){
-        $job = JobOffer::find($id);
-        $job->delete();
-        return response()->json([
-            'message' => 'Job deleted successfully',
-        ]);
     }
 }

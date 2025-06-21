@@ -21,9 +21,8 @@ class JobOffer extends Model
         'qualifications',
         'image',
         'type',
-        'level',
-        'min_expected_salary',
-        'max_expected_salary',
+        'experience',
+        'expected_salary',
         'expire_date',
         'status',
         'location_link'

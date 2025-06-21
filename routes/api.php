@@ -9,7 +9,9 @@ use App\Http\Controllers\Api\Admin\SpecializationController;
 use App\Http\Controllers\Api\Admin\UserController;
 use App\Http\Controllers\Api\Admin\ZoneController;
 use App\Http\Controllers\Api\Auth\AuthController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\Employeer\ChangePsswordController;
+use App\Http\Controllers\Api\Employeer\HomePageController;
+use App\Http\Controllers\Api\Employeer\JobController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -68,4 +70,21 @@ Route::middleware(['auth:sanctum','IsAdmin'])->group(function () {
     Route::post('/admin/addJob',[JobOfferController::class,'addJob']);
     Route::put('/admin/editJob/{id}',[JobOfferController::class,'editJob']);
     Route::delete('/admin/deleteJob/{id}',[JobOfferController::class,'deleteJob']);
+});
+
+
+
+
+Route::middleware(['auth:sanctum','IsEmployeer'])->group(function () {
+// Home Page
+    Route::get('/employeer/homePage',[HomePageController::class,'homePage']);
+
+//change password
+    Route::post('/employeer/changePassword',[ChangePsswordController::class,'changePassword']);
+
+//jobs
+    Route::get('/employeer/getJobs',[JobController::class,'getJobs']);
+    Route::post('/employeer/addNewJob',[JobController::class,'addNewJob']);
+    Route::put('/employeer/editJob/{id}',[JobController::class,'editJob']);
+    Route::delete('/employeer/deleteJob/{id}',[JobController::class,'deleteJob']);
 });
