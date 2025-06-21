@@ -80,7 +80,7 @@ Route::middleware(['auth:sanctum','IsEmployeer'])->group(function () {
     Route::get('/employeer/homePage',[HomePageController::class,'homePage']);
 
 //change password
-    Route::post('/employeer/changePassword',[ChangePsswordController::class,'changePassword']);
+    Route::put('/employeer/changePassword',[ChangePsswordController::class,'changePassword']);
 
 //jobs
     Route::get('/employeer/getJobs',[JobController::class,'getJobs']);
