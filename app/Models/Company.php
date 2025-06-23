@@ -26,7 +26,7 @@ class Company extends Model
         'twitter_link',
         'linkedin_link',
         'status',
-        'type',
+        'company_type_id',
     ];
 
     public $timestamps = false;
@@ -59,6 +59,11 @@ class Company extends Model
     public function jobOffers()
     {
         return $this->hasMany(JobOffer::class);
+    }
+
+    public function companyType()
+    {
+        return $this->belongsTo(CompanyType::class);
     }
 
 }

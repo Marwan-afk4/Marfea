@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Admin\CityController;
 use App\Http\Controllers\Api\Admin\CompanyController;
+use App\Http\Controllers\Api\Admin\CompanyTypeController;
 use App\Http\Controllers\Api\Admin\CountryController;
 use App\Http\Controllers\Api\Admin\JobCetgoryController;
 use App\Http\Controllers\Api\Admin\JobOfferController;
@@ -70,6 +71,13 @@ Route::middleware(['auth:sanctum','IsAdmin'])->group(function () {
     Route::post('/admin/addJob',[JobOfferController::class,'addJob']);
     Route::put('/admin/editJob/{id}',[JobOfferController::class,'editJob']);
     Route::delete('/admin/deleteJob/{id}',[JobOfferController::class,'deleteJob']);
+
+//CompanyType
+    Route::get('/admin/getCompanyTypes',[CompanyTypeController::class,'getCompanyTypes']);
+    Route::get('/admin/getActiveCompanyTypes',[CompanyTypeController::class,'getActiveCompanyTypes']);
+    Route::post('/admin/addCompanyType',[CompanyTypeController::class,'addCompanyType']);
+    Route::put('/admin/editCompanyType/{id}',[CompanyTypeController::class,'editCompanyType']);
+    Route::delete('/admin/deleteCompanyType/{id}',[CompanyTypeController::class,'deleteCompanyType']);
 });
 
 

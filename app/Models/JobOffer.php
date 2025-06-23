@@ -16,7 +16,7 @@ class JobOffer extends Model
         'job_category_id',
         'city_id',
         'zone_id',
-        'title',
+        'job_titel_id',
         'description',
         'qualifications',
         'image',
@@ -58,6 +58,11 @@ class JobOffer extends Model
     public function zone()
     {
         return $this->belongsTo(Zone::class);
+    }
+
+    public function jobTitel()
+    {
+        return $this->belongsTo(JobTitel::class);
     }
 
 }
