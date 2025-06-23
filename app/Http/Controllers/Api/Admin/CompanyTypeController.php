@@ -62,8 +62,8 @@ class CompanyTypeController extends Controller
         if ($validation->fails()) {
             return response()->json(['errors' => $validation->errors()], 422);
         }
-        $companyTypes->name = $request->name;
-        $companyTypes->status = $request->status;
+        $companyTypes->name = $request->name ?? $companyTypes->name;
+        $companyTypes->status = $request->status ?? $companyTypes->status;
         $companyTypes->save();
         return response()->json([
             'message' => 'Company Type Updated Successfully',

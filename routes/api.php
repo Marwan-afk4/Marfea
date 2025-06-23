@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Admin\CompanyTypeController;
 use App\Http\Controllers\Api\Admin\CountryController;
 use App\Http\Controllers\Api\Admin\JobCetgoryController;
 use App\Http\Controllers\Api\Admin\JobOfferController;
+use App\Http\Controllers\Api\Admin\JobTittleController;
 use App\Http\Controllers\Api\Admin\SpecializationController;
 use App\Http\Controllers\Api\Admin\UserController;
 use App\Http\Controllers\Api\Admin\ZoneController;
@@ -78,6 +79,13 @@ Route::middleware(['auth:sanctum','IsAdmin'])->group(function () {
     Route::post('/admin/addCompanyType',[CompanyTypeController::class,'addCompanyType']);
     Route::put('/admin/editCompanyType/{id}',[CompanyTypeController::class,'editCompanyType']);
     Route::delete('/admin/deleteCompanyType/{id}',[CompanyTypeController::class,'deleteCompanyType']);
+
+//JobTittle
+    Route::get('/admin/getJobTitles',[JobTittleController::class,'getJobTittles']);
+    Route::get('/admin/getActiveJobTittles',[JobTittleController::class,'getActiveJobTittles']);
+    Route::post('/admin/addJobTittle',[JobTittleController::class,'addJobTitel']);
+    Route::put('/admin/editJobTittle/{id}',[JobTittleController::class,'updateJobTitel']);
+    Route::delete('/admin/deleteJobTittle/{id}',[JobTittleController::class,'deleteJobTitel']);
 });
 
 
