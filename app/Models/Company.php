@@ -66,4 +66,9 @@ class Company extends Model
         return $this->belongsTo(CompanyType::class);
     }
 
+    public function drugs()
+    {
+        return $this->hasMany(Drug::class);
+    }
+
 }
