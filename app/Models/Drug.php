@@ -18,10 +18,18 @@ class Drug extends Model
         'description',
         'image'
     ];
-    
+
     public $timestamps = true;
 
-    
+    protected $appends =[
+        'image_link',
+    ];
+
+    public function getImageLinkAttribute()
+    {
+        return $this->image ? asset('storage/' . $this->image) : null;
+    }
+
     public function company()
     {
         return $this->belongsTo(Company::class);

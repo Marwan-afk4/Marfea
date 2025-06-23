@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\Admin\CityController;
 use App\Http\Controllers\Api\Admin\CompanyController;
 use App\Http\Controllers\Api\Admin\CompanyTypeController;
 use App\Http\Controllers\Api\Admin\CountryController;
+use App\Http\Controllers\Api\Admin\DrugsController;
 use App\Http\Controllers\Api\Admin\JobCetgoryController;
 use App\Http\Controllers\Api\Admin\JobOfferController;
 use App\Http\Controllers\Api\Admin\JobTittleController;
@@ -86,6 +87,12 @@ Route::middleware(['auth:sanctum','IsAdmin'])->group(function () {
     Route::post('/admin/addJobTittle',[JobTittleController::class,'addJobTitel']);
     Route::put('/admin/editJobTittle/{id}',[JobTittleController::class,'updateJobTitel']);
     Route::delete('/admin/deleteJobTittle/{id}',[JobTittleController::class,'deleteJobTitel']);
+
+//Drugs
+    Route::get('/admin/getDrugs',[DrugsController::class,'getDrugs']);
+    Route::post('/admin/addDrug',[DrugsController::class,'createDrug']);
+    Route::put('/admin/editDrug/{id}',[DrugsController::class,'updateDrug']);
+    Route::delete('/admin/deleteDrug/{id}',[DrugsController::class,'destroyDrug']);
 });
 
 
