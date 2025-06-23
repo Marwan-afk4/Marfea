@@ -32,7 +32,7 @@ class JobTittleController extends Controller
     public function addJobTitel(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            'name' => 'required|string|unique:job_tittles,name',
+            'name' => 'required|string|unique:job_titels,name',
             'description'=> 'nullable|string',
             'status' => 'required|in:active,inactive',
         ]);
@@ -56,7 +56,7 @@ class JobTittleController extends Controller
     {
         $jobTitel = JobTitel::find($id);
         $validation = Validator::make($request->all(), [
-            'name' => 'nullable|string|unique:job_tittles,name,' . $request->id,
+            'name' => 'nullable|string|unique:job_titels,name,' . $request->id,
             'description'=> 'nullable|string',
             'status' => 'nullable|in:active,inactive',
         ]);
