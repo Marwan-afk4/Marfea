@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\Admin\DrugsController;
 use App\Http\Controllers\Api\Admin\JobCetgoryController;
 use App\Http\Controllers\Api\Admin\JobOfferController;
 use App\Http\Controllers\Api\Admin\JobTittleController;
+use App\Http\Controllers\Api\Admin\PendingEmployeerController;
 use App\Http\Controllers\Api\Admin\PlansController;
 use App\Http\Controllers\Api\Admin\SpecializationController;
 use App\Http\Controllers\Api\Admin\UserController;
@@ -107,6 +108,11 @@ Route::middleware(['auth:sanctum','IsAdmin'])->group(function () {
     Route::post('/admin/addPlan',[PlansController::class,'createPlan']);
     Route::put('/admin/editPlan/{id}',[PlansController::class,'updatePlan']);
     Route::delete('/admin/deletePlan/{id}',[PlansController::class,'destroy']);
+
+//Pending Employeer
+    Route::get('/admin/getPendingEmployeer',[PendingEmployeerController::class,'getPendingEmployeerRequest']);
+    Route::put('/admin/acceptPendingEmployeer/{id}',[PendingEmployeerController::class,'approvePendingEmployeerRequest']);
+    Route::put('/admin/rejectPendingEmployeer/{id}',[PendingEmployeerController::class,'rejectPendingEmployeerRequest']);
 });
 
 
