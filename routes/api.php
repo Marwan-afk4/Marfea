@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Admin\CompanyTypeController;
 use App\Http\Controllers\Api\Admin\CountryController;
 use App\Http\Controllers\Api\Admin\DrugCategoryController;
 use App\Http\Controllers\Api\Admin\DrugsController;
+use App\Http\Controllers\Api\Admin\HomePageController as AdminHomePageController;
 use App\Http\Controllers\Api\Admin\JobCetgoryController;
 use App\Http\Controllers\Api\Admin\JobOfferController;
 use App\Http\Controllers\Api\Admin\JobTittleController;
@@ -115,6 +116,9 @@ Route::middleware(['auth:sanctum','IsAdmin'])->group(function () {
     Route::get('/admin/getRejectedEmployeer',[PendingEmployeerController::class,'getRejectedEmployeerRequest']);
     Route::put('/admin/acceptPendingEmployeer/{id}',[PendingEmployeerController::class,'approvePendingEmployeerRequest']);
     Route::put('/admin/rejectPendingEmployeer/{id}',[PendingEmployeerController::class,'rejectPendingEmployeerRequest']);
+
+//HomePage
+    Route::get('/admin/homePage',[AdminHomePageController::class,'homePage']);
 });
 
 
