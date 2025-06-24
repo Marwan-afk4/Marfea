@@ -14,7 +14,12 @@ class CompanyController extends Controller
 
     public function getCompanies()
     {
-        $companies = Company::with(['companySpecializations' , 'companySpecializations.specialization:id,name' , 'user:id,name,email,phone'])->get();
+        $$companies = Company::with([
+            'companySpecializations',
+            'companySpecializations.specialization:id,name',
+            'user:id,firstname,lastname,email,phone'
+        ])->get();
+
         return response()->json([
             'companies' => $companies,
         ]);
