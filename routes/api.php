@@ -111,6 +111,8 @@ Route::middleware(['auth:sanctum','IsAdmin'])->group(function () {
 
 //Pending Employeer
     Route::get('/admin/getPendingEmployeer',[PendingEmployeerController::class,'getPendingEmployeerRequest']);
+    Route::get('/admin/getApprovedEmployeer',[PendingEmployeerController::class,'getApprovedEmployeerRequest']);
+    Route::get('/admin/getRejectedEmployeer',[PendingEmployeerController::class,'getRejectedEmployeerRequest']);
     Route::put('/admin/acceptPendingEmployeer/{id}',[PendingEmployeerController::class,'approvePendingEmployeerRequest']);
     Route::put('/admin/rejectPendingEmployeer/{id}',[PendingEmployeerController::class,'rejectPendingEmployeerRequest']);
 });

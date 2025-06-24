@@ -24,6 +24,34 @@ class PendingEmployeerController extends Controller
         return response()->json($data);
     }
 
+    public function getApprovedEmployeerRequest()
+    {
+        $approvedEmployeer = User::where('role', 'employeer')
+        ->where('status', 'approved')
+        ->with('companies')
+        ->get();
+
+        $data = [
+            'approvedEmployeer'=> $approvedEmployeer
+        ];
+
+        return response()->json($data);
+    }
+
+    public function getRejectedEmployeerRequest()
+    {
+        $rejectedEmployeer = User::where('role', 'employeer')
+        ->where('status', 'rejected')
+        ->with('companies')
+        ->get();
+
+        $data = [
+            'rejectedEmployeer'=> $rejectedEmployeer
+        ];
+
+        return response()->json($data);
+    }
+
     public function approvePendingEmployeerRequest($id)
     {
         $user = User::find($id);
