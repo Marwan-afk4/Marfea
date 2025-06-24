@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\Admin\DrugsController;
 use App\Http\Controllers\Api\Admin\JobCetgoryController;
 use App\Http\Controllers\Api\Admin\JobOfferController;
 use App\Http\Controllers\Api\Admin\JobTittleController;
+use App\Http\Controllers\Api\Admin\PlansController;
 use App\Http\Controllers\Api\Admin\SpecializationController;
 use App\Http\Controllers\Api\Admin\UserController;
 use App\Http\Controllers\Api\Admin\ZoneController;
@@ -100,6 +101,12 @@ Route::middleware(['auth:sanctum','IsAdmin'])->group(function () {
     Route::post('/admin/addDrugCategory',[DrugCategoryController::class,'addDrugCategory']);
     Route::put('/admin/editDrugCategory/{id}',[DrugCategoryController::class,'editDrugCategory']);
     Route::delete('/admin/deleteDrugCategory/{id}',[DrugCategoryController::class,'deleteDrugCategory']);
+
+//Plans
+    Route::get('/admin/getPlans',[PlansController::class,'getPlans']);
+    Route::post('/admin/addPlan',[PlansController::class,'createPlan']);
+    Route::put('/admin/editPlan/{id}',[PlansController::class,'updatePlan']);
+    Route::delete('/admin/deletePlan/{id}',[PlansController::class,'destroy']);
 });
 
 
