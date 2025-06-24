@@ -16,8 +16,13 @@ class DrugCategory extends Model
         'description',
         'status'
     ];
-    
+
     public $timestamps = true;
 
-    
+
+
+    public function drug()
+    {
+        return $this->hasMany(Drug::class);
+    }
 }

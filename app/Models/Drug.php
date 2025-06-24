@@ -13,6 +13,7 @@ class Drug extends Model
 
     protected $fillable = [
         'company_id',
+        'drug_category_id',
         'user_id',
         'name',
         'description',
@@ -38,6 +39,11 @@ class Drug extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function drugCategory()
+    {
+        return $this->belongsTo(DrugCategory::class);
     }
 
 }

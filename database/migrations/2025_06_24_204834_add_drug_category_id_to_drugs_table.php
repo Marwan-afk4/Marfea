@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('drug_categories', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('description')->nullable();
-            $table->enum('status', ['active', 'inactive'])->default('active');
-            $table->timestamps();
+        Schema::table('drugs', function (Blueprint $table) {
+            $table->foreignId('drug_category_id')->nullable()->after('company_id')->constrained('drug_categories')->cascadeOnDelete();
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('drug_categories');
+        Schema::table('drugs', function (Blueprint $table) {
+            //
+        });
     }
 };
