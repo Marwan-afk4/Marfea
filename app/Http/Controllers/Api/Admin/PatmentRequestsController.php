@@ -31,6 +31,44 @@ class PatmentRequestsController extends Controller
         return response()->json($data);
     }
 
+    public function getApprovedPaymentRequests()
+    {
+        $ApprovedPaymentRequests = PaymentRequest::with([
+            'company:id,name',
+            'plan:id,name,price_after_discount',
+            'empeloyee:id,first_name,last_name,email,phone',
+            'paymentMethod:id,name'
+            ])
+        ->where('status','approved')
+        ->get();
+
+        $data =[
+            'Approved_payments_count' => $ApprovedPaymentRequests->count(),
+            'Approved_payment_requests' => $ApprovedPaymentRequests
+        ];
+
+        return response()->json($data);
+    }
+
+    public function getRejectedPaymentRequests()
+    {
+        $rejectedPaymentRequests = PaymentRequest::with([
+            'company:id,name',
+            'plan:id,name,price_after_discount',
+            'empeloyee:id,first_name,last_name,email,phone',
+            'paymentMethod:id,name'
+            ])
+        ->where('status','rejected')
+        ->get();
+
+        $data =[
+            'rejected_payments_count' => $rejectedPaymentRequests->count(),
+            'rejected_payment_requests' => $rejectedPaymentRequests
+        ];
+
+        return response()->json($data);
+    }
+
     public function acceptPaymentRequests($id)
     {
         $pendingPaymentRequests = PaymentRequest::findOrfail($id);
