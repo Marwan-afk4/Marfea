@@ -30,7 +30,7 @@ class PaymentRequest extends Model
 
     public function getReceiptImageLinkAttribute()
     {
-        return $this->receipt_image_link ? asset( 'storage/'.$this->receipt_image_link) : null;
+        return $this->receipt_image ? asset( 'storage/'.$this->receipt_image) : null;
     }
     public function plan()
     {

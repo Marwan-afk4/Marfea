@@ -16,8 +16,8 @@ class PatmentRequestsController extends Controller
         $pendingPaymentRequests = PaymentRequest::with([
             'company:id,name',
             'plan:id,name,price_after_discount',
-            'empeloyee',
-            'paymentMethod'
+            'empeloyee:id,first_name,last_name,email,phone',
+            'paymentMethod:id,name'
             ])
         ->where('status','pending')
         ->get();

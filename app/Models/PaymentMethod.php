@@ -21,6 +21,11 @@ class PaymentMethod extends Model
 
     public $timestamps = true;
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
     protected $appends =[
         'image_link',
     ];
