@@ -13,7 +13,8 @@ class UserController extends Controller
 
     public function getUsers()
     {
-        $users = User::where('role','user')
+        $users = User::with('specializations')
+        ->where('role','user')
         ->where('status','!=','deleted')
         ->get();
         $data =[

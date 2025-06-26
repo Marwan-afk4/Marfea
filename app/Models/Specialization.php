@@ -15,8 +15,18 @@ class Specialization extends Model
         'name',
         'status'
     ];
-    
+
     public $timestamps = true;
 
-    
+    protected $hidden =[
+        'created_at',
+        'updated_at'
+    ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'users_specializations');
+    }
+
+
 }

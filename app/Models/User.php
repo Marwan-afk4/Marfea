@@ -66,4 +66,8 @@ class User extends Model
         return $this->hasMany(Drug::class);
     }
 
+    public function specializations()
+    {
+        return $this->belongsToMany(Specialization::class, 'users_specializations');
+    }
 }
