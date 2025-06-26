@@ -14,7 +14,7 @@ class PendingEmployeerController extends Controller
     {
         $pendingEmployeer = User::where('role', 'employeer')
         ->where('status', 'pending')
-        ->with('companies')
+        ->with('company:id,name,email,phone')
         ->get();
 
         $data = [
@@ -42,7 +42,7 @@ class PendingEmployeerController extends Controller
     {
         $rejectedEmployeer = User::where('role', 'employeer')
         ->where('status', 'rejected')
-        ->with('companies')
+        ->with('company:id,name,email,phone')
         ->get();
 
         $data = [
