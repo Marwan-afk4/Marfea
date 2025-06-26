@@ -58,7 +58,7 @@ class User extends Model
 
     public function companies()
     {
-        return $this->hasMany(Company::class);
+        return $this->hasMany(Company::class,'employeer_id');
     }
 
     public function drugs()
