@@ -29,6 +29,7 @@ class PlansController extends Controller
             'price_after_discount'=> 'required|numeric|gt:0',
             'type'=> 'required|in:monthly,yearly',
             'status'=> 'required|in:active,inactive',
+            'top_picked'=> 'nullable|boolean',
             'features'=> 'nullable|array',
             'features.*' => 'nullable|string|max:255',
             'features.cv_number' => 'required|numeric|min:1',
@@ -48,6 +49,7 @@ class PlansController extends Controller
             'status'=> $request->status,
             'price_after_discount'=> $request->price_after_discount,
             'features'=> $request->features,
+            'top_picked'=> $request->top_picked ?? 0,
         ]);
 
         foreach($request->job_category_ids as $jobCategoryId)
@@ -73,6 +75,7 @@ class PlansController extends Controller
             'price_after_discount' => 'nullable|numeric|gt:0',
             'type' => 'nullable|in:monthly,yearly',
             'status' => 'nullable|in:active,inactive',
+            'top_picked'=> 'nullable|boolean',
             'features' => 'nullable|array',
             'features.*' => 'nullable|string|max:255',
             'features.cv_number' => 'nullable|numeric|min:1',
@@ -104,6 +107,7 @@ class PlansController extends Controller
             'status' => $request->status ?? $plan->status,
             'price_after_discount' => $request->price_after_discount ?? $plan->price_after_discount,
             'features' => $mergedFeatures,
+            'top_picked' => $request->top_picked ?? $plan->top_picked
         ]);
 
         if ($request->has('job_category_ids')) {
