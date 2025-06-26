@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\Admin\HomePageController as AdminHomePageController
 use App\Http\Controllers\Api\Admin\JobCetgoryController;
 use App\Http\Controllers\Api\Admin\JobOfferController;
 use App\Http\Controllers\Api\Admin\JobTittleController;
+use App\Http\Controllers\Api\Admin\PaymentMethodController;
 use App\Http\Controllers\Api\Admin\PendingEmployeerController;
 use App\Http\Controllers\Api\Admin\PlansController;
 use App\Http\Controllers\Api\Admin\SpecializationController;
@@ -116,6 +117,12 @@ Route::middleware(['auth:sanctum','IsAdmin'])->group(function () {
     Route::get('/admin/getRejectedEmployeer',[PendingEmployeerController::class,'getRejectedEmployeerRequest']);
     Route::put('/admin/acceptPendingEmployeer/{id}',[PendingEmployeerController::class,'approvePendingEmployeerRequest']);
     Route::put('/admin/rejectPendingEmployeer/{id}',[PendingEmployeerController::class,'rejectPendingEmployeerRequest']);
+
+//PaymentMethods
+    Route::get('/admin/getPaymentMethods',[PaymentMethodController::class,'getPyamentMethod']);
+    Route::post('/admin/addPaymentMethod',[PaymentMethodController::class,'addPaymentMethod']);
+    Route::put('/admin/editPaymentMethod/{id}',[PaymentMethodController::class,'editPaymentMethod']);
+    Route::delete('/admin/deletePaymentMethod/{id}',[PaymentMethodController::class,'deletePaymentMethod']);
 
 //HomePage
     Route::get('/admin/homePage',[AdminHomePageController::class,'homePage']);
