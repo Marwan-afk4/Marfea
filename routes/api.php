@@ -20,6 +20,7 @@ use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Employeer\ChangePsswordController;
 use App\Http\Controllers\Api\Employeer\HomePageController;
 use App\Http\Controllers\Api\Employeer\JobController;
+use App\Http\Controllers\Api\Employeer\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -143,4 +144,7 @@ Route::middleware(['auth:sanctum','IsEmployeer'])->group(function () {
     Route::post('/employeer/addNewJob',[JobController::class,'addNewJob']);
     Route::put('/employeer/editJob/{id}',[JobController::class,'editJob']);
     Route::delete('/employeer/deleteJob/{id}',[JobController::class,'deleteJob']);
+
+//PlanPayment
+    Route::post('/employeer/makePlanPyament',[PaymentController::class,'makePlanPyament']);
 });

@@ -38,7 +38,7 @@ class CompanyController extends Controller
             'twitter_link' => 'nullable',
             'linkedin_link' => 'nullable',
             'site_link' => 'nullable',
-            'type'=>'required|string',
+            'company_type_id'=>'required|exists:company_types,id',
             'specializations' => 'nullable|array',
             'specializations.*' => 'nullable|exists:specializations,id',
         ]);
@@ -58,7 +58,7 @@ class CompanyController extends Controller
             'twitter_link' => $request->twitter_link??null,
             'linkedin_link' => $request->linkedin_link??null,
             'site_link' => $request->site_link??null,
-            'type'=>$request->type,
+            'company_type_id'=>$request->company_type_id,
             'status'=>'active',
         ]);
 
@@ -91,7 +91,7 @@ class CompanyController extends Controller
             'twitter_link' => 'nullable|url',
             'linkedin_link' => 'nullable|url',
             'site_link' => 'nullable|url',
-            'type' => 'required|string',
+            'company_type_id' => 'nullable|exists:company_types,id',
             'specializations' => 'nullable|array',
             'specializations.*' => 'nullable|exists:specializations,id',
         ]);
@@ -112,7 +112,7 @@ class CompanyController extends Controller
             'twitter_link' => $request->twitter_link ?? $company->twitter_link,
             'linkedin_link' => $request->linkedin_link ?? $company->linkedin_link,
             'site_link' => $request->site_link ?? $company->site_link,
-            'type' => $request->type ?? $company->type
+            'company_type_id' => $request->type ?? $company->company_type_id
         ]);
 
         // Optional: update specializations (replace all)

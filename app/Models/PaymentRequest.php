@@ -24,6 +24,14 @@ class PaymentRequest extends Model
     public $timestamps = true;
 
 
+    protected $appends = [
+        'receipt_image_link'
+    ];
+
+    public function getReceiptImageLinkAttribute()
+    {
+        return $this->receipt_image_link ? asset( 'storage/'.$this->receipt_image_link) : null;
+    }
     public function plan()
     {
         return $this->belongsTo(Plan::class);
