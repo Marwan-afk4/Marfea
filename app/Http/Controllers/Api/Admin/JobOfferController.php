@@ -16,7 +16,7 @@ class JobOfferController extends Controller
     public function getJobs()
     {
         $jobs = JobOffer::with([
-            'jobTitele:id,name',
+            'jobTitel:id,name',
             'company:id,name,email,phone',
             'jobCategory', 'city:id,name,country_id',
             'zone:id,name,city_id'
