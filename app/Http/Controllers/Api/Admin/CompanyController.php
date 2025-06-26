@@ -15,6 +15,7 @@ class CompanyController extends Controller
     public function getCompanies()
     {
         $companies = Company::with([
+            'companyType:id,name',
             'companySpecializations',
             'companySpecializations.specialization:id,name',
             'user:id,first_name,last_name,email,phone'

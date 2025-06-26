@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\Admin\HomePageController as AdminHomePageController
 use App\Http\Controllers\Api\Admin\JobCetgoryController;
 use App\Http\Controllers\Api\Admin\JobOfferController;
 use App\Http\Controllers\Api\Admin\JobTittleController;
+use App\Http\Controllers\Api\Admin\PatmentRequestsController;
 use App\Http\Controllers\Api\Admin\PaymentMethodController;
 use App\Http\Controllers\Api\Admin\PendingEmployeerController;
 use App\Http\Controllers\Api\Admin\PlansController;
@@ -127,6 +128,10 @@ Route::middleware(['auth:sanctum','IsAdmin'])->group(function () {
 
 //HomePage
     Route::get('/admin/homePage',[AdminHomePageController::class,'homePage']);
+
+//pendingPyament
+    Route::get('/admin/getPendingPyament',[PatmentRequestsController::class,'getPendingPaymentRequests']);
+    Route::put('/admin/acceptPendingPyament/{id}',[PatmentRequestsController::class,'acceptPaymentRequests']);
 });
 
 

@@ -16,6 +16,7 @@ class JobOfferController extends Controller
     public function getJobs()
     {
         $jobs = JobOffer::with([
+            'jobTitele:id,name',
             'company:id,name,email,phone',
             'jobCategory', 'city:id,name,country_id',
             'zone:id,name,city_id'
@@ -32,7 +33,7 @@ class JobOfferController extends Controller
             'job_category_id' => 'required|exists:job_categories,id',
             'city_id' => 'required|exists:cities,id',
             'zone_id' => 'required|exists:zones,id',
-            'title' => 'required',
+            'job_titel_id' => 'required|exists:job_titels,id',
             'description' => 'required',
             'qualifications' => 'nullable',
             'image'=>'nullable',
@@ -53,7 +54,7 @@ class JobOfferController extends Controller
             'job_category_id' => $request->job_category_id ?? null,
             'city_id' => $request->city_id ?? null,
             'zone_id' => $request->zone_id ?? null,
-            'title' => $request->title ?? null,
+            'job_titel_id' => $request->job_titel_id,
             'description' => $request->description ?? null,
             'qualifications' => $request->qualifications ?? null,
             'image' => $request->image ? $this->storeBase64Image($request->image, 'jobs/images') : null,
@@ -82,7 +83,7 @@ class JobOfferController extends Controller
             'job_category_id' => 'nullable|exists:job_categories,id',
             'city_id' => 'nullable|exists:cities,id',
             'zone_id' => 'nullable|exists:zones,id',
-            'title' => 'nullable',
+            'job_titel_id' => 'nullable|exists:job_titels,id',
             'description' => 'nullable',
             'qualifications' => 'nullable',
             'image'=>'nullable',
@@ -103,7 +104,7 @@ class JobOfferController extends Controller
             'job_category_id' => $request->job_category_id ?? $job->job_category_id,
             'city_id' => $request->city_id ?? $job->city_id,
             'zone_id' => $request->zone_id ?? $job->zone_id,
-            'title' => $request->title ?? $job->title,
+            'job_titel_id' => $request->job_titel_id ?? $job->job_titel_id,
             'description' => $request->description ?? $job->description,
             'qualifications' => $request->qualifications ?? $job->qualifications,
             'image' => $request->image ? $this->storeBase64Image($request->image, 'jobs/images') : $job->image,
