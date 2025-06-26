@@ -16,7 +16,9 @@ class HomePageController extends Controller
     {
         $totalActiveJobs = JobOffer::where('status', 'active')->count();
 
-        $totalUsers = User::where('role', 'user')->count();
+        $totalUsers = User::where('role', 'user')
+        ->where('status','!=','deleted')
+        ->count();
 
         $totalCompanies = Company::all()->count();
 
