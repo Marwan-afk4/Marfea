@@ -70,4 +70,10 @@ class User extends Model
     {
         return $this->belongsToMany(Specialization::class, 'users_specializations');
     }
+
+    public function activeSubscription()
+    {
+        return $this->hasOne(Subscription::class, 'employee_id')->where('status', 'active');
+    }
+
 }

@@ -197,10 +197,16 @@ class AuthController extends Controller
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
+        $activeSubscription = $user->activeSubscription()
+        ->where('status', 'active')
+        ->latest()
+        ->first();
+
         return response()->json([
             'message'=>'Login successfully',
             'token' => $token,
-            'user'=>$user
+            'user'=>$user,
+            'subscription_status' => $activeSubscription ? 'active' : 'inactive',
         ], 200);
     }
 }
