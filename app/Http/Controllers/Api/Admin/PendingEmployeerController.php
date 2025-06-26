@@ -28,7 +28,7 @@ class PendingEmployeerController extends Controller
     {
         $approvedEmployeer = User::where('role', 'employeer')
         ->where('status', 'approved')
-        ->with('companies:id,name,email,phone')
+        ->with('company:id,name,email,phone')
         ->get();
 
         $data = [
