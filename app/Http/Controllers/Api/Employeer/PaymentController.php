@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Employeer;
 
 use App\Http\Controllers\Controller;
 use App\Models\PaymentRequest;
+use App\Models\Plan;
 use App\trait\ImageUpload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -11,6 +12,17 @@ use Illuminate\Support\Facades\Validator;
 class PaymentController extends Controller
 {
     use ImageUpload;
+
+
+    public function getPlans(Request $request)
+    {
+        $plans = Plan::where('status', 'active')
+        ->with('jobCategories')->get();
+        $data = [
+            'plans'=> $plans
+        ];
+        return response()->json($data,200);
+    }
 
     public function makePlanPyament(Request $request)
     {

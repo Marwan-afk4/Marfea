@@ -152,6 +152,9 @@ Route::middleware(['auth:sanctum','IsEmployeer'])->group(function () {
     Route::put('/employeer/editJob/{id}',[JobController::class,'editJob']);
     Route::delete('/employeer/deleteJob/{id}',[JobController::class,'deleteJob']);
 
+//Plans
+    Route::get('/employeer/getPlans',[PaymentController::class,'getPlans']);
+
 //PlanPayment
     Route::post('/employeer/makePlanPyament',[PaymentController::class,'makePlanPyament']);
 });
