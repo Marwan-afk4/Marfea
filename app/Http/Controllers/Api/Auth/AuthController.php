@@ -207,6 +207,7 @@ class AuthController extends Controller
             'token' => $token,
             'user'=>$user,
             'subscription_status' => $activeSubscription ? 'active' : 'inactive',
+            'subscription' => $activeSubscription, // include full record or just id, dates, etc.
         ], 200);
     }
 }
