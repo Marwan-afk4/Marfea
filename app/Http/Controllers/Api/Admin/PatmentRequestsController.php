@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\PaymentRequest;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PatmentRequestsController extends Controller
 {
@@ -51,5 +52,26 @@ class PatmentRequestsController extends Controller
         return response()->json([
             'message' => 'Payment request accepted successfully',
         ]);
+    }
+
+    public function rejectPaymentRequests(Request $request,$id)
+    {
+        $validation = Validator::make($request->all(), [
+            'reason' => 'required|string',
+        ]);
+
+        if ($validation->fails()) {
+            return response()->json(['errors' => $validation->errors()]);
+        }
+
+        $pendingPaymentRequests = PaymentRequest::findOrfail($id);
+        $pendingPaymentRequests->status = 'rejected';
+        $pendingPaymentRequests->reject_reason = $request->reason;
+        $pendingPaymentRequests->save();
+
+        return response()->json([
+            'message' => 'Payment request rejected successfully',
+        ]);
+
     }
 }
