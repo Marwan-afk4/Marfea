@@ -13,7 +13,7 @@ class PlansController extends Controller
 
     public function getPlans(Request $request)
     {
-        $plans = Plan::all();
+        $plans = Plan::with('jobCategories')->get();
         $data = [
             "plans"=> $plans
         ];
@@ -32,6 +32,8 @@ class PlansController extends Controller
             'features'=> 'nullable|array',
             'features.*' => 'nullable|string|max:255',
             'features.cv_number' => 'required|numeric|min:1',
+            'job_category_ids' => 'required|array|min:1',
+            'job_category_ids.*' => 'exists:job_categories,id',
         ]);
 
         if ($validation->fails()) {
@@ -47,6 +49,11 @@ class PlansController extends Controller
             'price_after_discount'=> $request->price_after_discount,
             'features'=> $request->features,
         ]);
+
+        foreach($request->job_category_ids as $jobCategoryId)
+        {
+            $plan->jobCategories()->attach($jobCategoryId,['status' => 'active']);
+        }
 
         return response()->json(['message'=> 'Plan added successfully'],200);
     }
@@ -69,6 +76,8 @@ class PlansController extends Controller
             'features' => 'nullable|array',
             'features.*' => 'nullable|string|max:255',
             'features.cv_number' => 'nullable|numeric|min:1',
+            'job_category_ids' => 'nullable|array',
+            'job_category_ids.*' => 'exists:job_categories,id',
         ]);
 
         if ($validation->fails()) {
@@ -97,6 +106,13 @@ class PlansController extends Controller
             'features' => $mergedFeatures,
         ]);
 
+        if ($request->has('job_category_ids')) {
+            $plan->jobCategories()->sync(
+                collect($request->job_category_ids)->mapWithKeys(function ($id) {
+                    return [$id => ['status' => 'active']]; // default status
+                })->toArray()
+            );
+        }
 
         return response()->json(['message' => 'Plan updated successfully'], 200);
     }

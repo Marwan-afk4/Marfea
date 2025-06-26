@@ -18,7 +18,8 @@ class Plan extends Model
         'price_after_discount',
         'type',
         'features',
-        'status'
+        'status',
+        'top_picked'
     ];
 
     public $timestamps = true;
@@ -26,6 +27,13 @@ class Plan extends Model
     protected $casts = [
         'features' => 'array',
     ];
+
+    public function jobCategories()
+    {
+        return $this->belongsToMany(JobCategory::class, 'plan_job_categories')
+        ->withPivot('status')
+        ->withTimestamps();
+    }
 
 
 }

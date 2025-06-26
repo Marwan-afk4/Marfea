@@ -14,10 +14,12 @@ class PlansController extends Controller
     {
         $monthlyPlans = Plan::where('type', 'monthly')
         ->where('status', 'active')
+        ->with('jobCategories')
         ->get();
 
         $yearlyPlans = Plan::where('type', 'yearly')
         ->where('status', 'active')
+        ->with('jobCategories')
         ->get();
 
         $data = [
