@@ -132,8 +132,8 @@ Route::middleware(['auth:sanctum','IsAdmin'])->group(function () {
 
 //pendingPyament
     Route::get('/admin/getPendingPyament',[PatmentRequestsController::class,'getPendingPaymentRequests']);
-    Route::post('/admin/getApprovedPyament',[PatmentRequestsController::class,'getApprovedPaymentRequests']);
-    Route::post('/admin/getRejectedPyament',[PatmentRequestsController::class,'getRejectedPaymentRequests']);
+    Route::get('/admin/getApprovedPyament',[PatmentRequestsController::class,'getApprovedPaymentRequests']);
+    Route::get('/admin/getRejectedPyament',[PatmentRequestsController::class,'getRejectedPaymentRequests']);
     Route::put('/admin/acceptPendingPyament/{id}',[PatmentRequestsController::class,'acceptPaymentRequests']);
     Route::put('/admin/rejectPendingPyament/{id}',[PatmentRequestsController::class,'rejectPaymentRequests']);
 });
