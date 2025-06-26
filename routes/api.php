@@ -36,6 +36,7 @@ Route::post('/login',[AuthController::class,'login']);
 Route::middleware(['auth:sanctum','IsAdmin'])->group(function () {
 //users
     Route::get('/admin/getUsers',[UserController::class,'getUsers']);
+    Route::post('/admin/addUser',[UserController::class,'addUser']);
     Route::put('/admin/editUser/{id}',[UserController::class,'editUser']);
     Route::put('/admin/deleteUser/{id}',[UserController::class,'deleteUser']);
 
