@@ -56,9 +56,9 @@ class User extends Model
     }
 
 
-    public function companies()
+    public function company()
     {
-        return $this->hasMany(Company::class,'employeer_id');
+        return $this->belongsTo(Company::class);
     }
 
     public function drugs()
