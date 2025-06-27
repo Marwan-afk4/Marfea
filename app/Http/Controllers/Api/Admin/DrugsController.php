@@ -16,7 +16,7 @@ class DrugsController extends Controller
     {
         $drugs = Drug::with([
             'company:id,name,email,phone',
-            'user:id,name',
+            'user:id,first_name,last_name,email,phone',
             'drugCategory:id,name'
             ])->get();
         $data = [
