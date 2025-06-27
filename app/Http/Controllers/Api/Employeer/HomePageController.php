@@ -14,7 +14,7 @@ class HomePageController extends Controller
     public function homePage(Request $request)
     {
         $user = $request->user();
-        $companyDetails = $user->companies()->first();
+        $companyDetails = $user->company()->first();
 
         $totalJobs = JobOffer::where('company_id', $companyDetails->id)
         ->count();

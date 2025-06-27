@@ -16,7 +16,7 @@ class JobController extends Controller
     public function getJobs(Request $request)
     {
         $user = $request->user();
-        $company = $user->companies()->first();
+        $company = $user->company()->first();
 
         $jobs = JobOffer::with([
             'company:id,name,email,phone',
@@ -33,7 +33,7 @@ class JobController extends Controller
     public function addNewJob(Request $request)
     {
         $user = $request->user();
-        $company = $user->companies()->first();
+        $company = $user->company()->first();
 
         if (!$company) {
             return response()->json(['error' => 'Company not found'], 404);
