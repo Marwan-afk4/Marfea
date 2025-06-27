@@ -21,6 +21,8 @@ use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Employeer\ChangePsswordController;
 use App\Http\Controllers\Api\Employeer\HomePageController;
 use App\Http\Controllers\Api\Employeer\JobController;
+use App\Http\Controllers\Api\Employeer\JobSuppliersController;
+use App\Http\Controllers\Api\Employeer\LocationController;
 use App\Http\Controllers\Api\Employeer\PaymentController;
 use App\Http\Controllers\Api\Employeer\PaymentMethodController as EmployeerPaymentMethodController;
 use Illuminate\Support\Facades\Route;
@@ -163,4 +165,16 @@ Route::middleware(['auth:sanctum','IsEmployeer'])->group(function () {
 
 //PayementMethods
     Route::get('/employeer/getPaymentMethods',[EmployeerPaymentMethodController::class,'getActivePaymentMethod']);
+
+//JobTittle
+    Route::get('/employeer/getActiveJobTittles',[JobSuppliersController::class,'getActiveJobTittles']);
+
+//JobCategory
+    Route::get('/employeer/getJobCategories',[JobSuppliersController::class,'getJobCategories']);
+
+//City
+    Route::get('/employeer/getCities',[LocationController::class,'getActiveCities']);
+
+//Zone
+    Route::get('/employeer/getZones',[LocationController::class,'getActiveZones']);
 });
