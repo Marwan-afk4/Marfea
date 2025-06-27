@@ -14,7 +14,11 @@ class DrugsController extends Controller
 
     public function getDrugs()
     {
-        $drugs = Drug::with(['company:id,name,email,phone','user:id,name'])->get();
+        $drugs = Drug::with([
+            'company:id,name,email,phone',
+            'user:id,name',
+            'drugCategory:id,name'
+            ])->get();
         $data = [
             'drugs'=> $drugs
         ];
@@ -23,8 +27,10 @@ class DrugsController extends Controller
 
     public function createDrug(Request $request)
     {
+        $user = $request->user();
         $validation = Validator::make($request->all(), [
             'company_id' => 'required|exists:companies,id',
+            'drug_category_id' => 'required|exists:drug_categories,id',
             'name' => 'required|string',
             'description' => 'nullable|string',
             'image'=> 'nullable',
@@ -36,6 +42,8 @@ class DrugsController extends Controller
 
         $createDrug = Drug::create([
             'company_id' => $request->company_id,
+            'drug_category_id' => $request->drug_category_id,
+            'user_id' => $user->id,
             'name'=> $request->name,
             'description'=> $request->description ?? null,
             'image'=> $this->storeBase64Image($request->image ,'drugs/images') ?? null,
@@ -49,9 +57,11 @@ class DrugsController extends Controller
 
     public function updateDrug(Request $request, $id)
     {
+        $user = $request->user();
         $drug = Drug::findOrFail($id);
         $validator = Validator::make($request->all(), [
             'company_id' => 'nullable|exists:companies,id',
+            'drug_category_id' => 'nullable|exists:drug_categories,id',
             'name' => 'nullable|string',
             'description' => 'nullable|string',
             'image' => 'nullable',
@@ -62,6 +72,8 @@ class DrugsController extends Controller
         }
 
         $drug->company_id = $request->company_id ?? $drug->company_id;
+        $drug->drug_category_id = $request->drug_category_id ?? $drug->drug_category_id;
+        $drug->user_id = $user->id ?? $drug->user_id;
         $drug->name = $request->name ?? $drug->name;
         $drug->description = $request->description ?? $drug->description;
         $drug->image = $this->storeBase64Image($request->image, 'drugs/images') ?? $drug->image;
