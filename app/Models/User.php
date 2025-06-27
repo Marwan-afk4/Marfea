@@ -61,6 +61,12 @@ class User extends Model
         return $this->belongsTo(Company::class);
     }
 
+
+    public function companies()
+    {
+        return $this->hasMany(Company::class);
+    }
+
     public function drugs()
     {
         return $this->hasMany(Drug::class);
