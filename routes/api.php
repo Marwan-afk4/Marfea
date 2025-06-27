@@ -22,6 +22,7 @@ use App\Http\Controllers\Api\Employeer\ChangePsswordController;
 use App\Http\Controllers\Api\Employeer\HomePageController;
 use App\Http\Controllers\Api\Employeer\JobController;
 use App\Http\Controllers\Api\Employeer\PaymentController;
+use App\Http\Controllers\Api\Employeer\PaymentMethodController as EmployeerPaymentMethodController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -159,4 +160,7 @@ Route::middleware(['auth:sanctum','IsEmployeer'])->group(function () {
 
 //PlanPayment
     Route::post('/employeer/makePlanPyament',[PaymentController::class,'makePlanPyament']);
+
+//PayementMethods
+    Route::get('/employeer/getPaymentMethods',[EmployeerPaymentMethodController::class,'getActivePaymentMethod']);
 });
