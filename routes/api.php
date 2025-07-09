@@ -25,6 +25,7 @@ use App\Http\Controllers\Api\Employeer\JobSuppliersController;
 use App\Http\Controllers\Api\Employeer\LocationController;
 use App\Http\Controllers\Api\Employeer\PaymentController;
 use App\Http\Controllers\Api\Employeer\PaymentMethodController as EmployeerPaymentMethodController;
+use App\Http\Controllers\Api\User\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -177,4 +178,15 @@ Route::middleware(['auth:sanctum','IsEmployeer'])->group(function () {
 
 //Zone
     Route::get('/employeer/getZones',[LocationController::class,'getActiveZones']);
+});
+
+
+
+
+
+Route::middleware(['auth:sanctum','IsUser'])->group(function () {
+
+//Profile
+    Route::get('/user/profile',[ProfileController::class,'getProfileData']);
+    Route::put('/user/profile/update',[ProfileController::class,'updateProfileData']);
 });

@@ -28,7 +28,7 @@ class User extends Model
         'role',
         'id_token',
         'company_id',
-        'specialization'
+        'age'
     ];
 
     public $timestamps = false;
@@ -59,6 +59,11 @@ class User extends Model
     public function company()
     {
         return $this->belongsTo(Company::class);
+    }
+
+    public function usercvs()
+    {
+        return $this->hasMany(UserCv::class);
     }
 
 

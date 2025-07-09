@@ -91,4 +91,30 @@ trait ImageUpload
             Storage::disk('public')->delete($imagePath);
         }
     }
+
+
+    public function storeBase64File($base64File, $folderPath = 'cvs')
+    {
+        // Only allow PDF files
+        if (preg_match('/^data:application\/pdf;base64,/', $base64File)) {
+            // Remove the MIME header part
+            $fileData = substr($base64File, strpos($base64File, ',') + 1);
+            $fileData = base64_decode($fileData);
+
+            if ($fileData === false) {
+                return null;
+            }
+
+            $fileName = uniqid() . '.pdf';
+            $filePath = $folderPath . '/' . $fileName;
+
+            Storage::disk('public')->put($filePath, $fileData);
+
+            return $filePath;
+        }
+
+        return null;
+    }
+
+
 }
