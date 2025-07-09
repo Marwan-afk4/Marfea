@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\trait\ImageUpload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -98,4 +99,26 @@ class ProfileController extends Controller
             ], 500);
         }
     }
+
+
+    public function deleteAccount(Request $request)
+    {
+        $user = $request->user();
+
+        if ($user->status === 'deleted') {
+            return response()->json([
+                'message' => 'Account already deleted.'
+            ], 400);
+        }
+
+        $user->status = 'deleted';
+        $user->save();
+
+        $request->user()->tokens()->delete(); 
+
+        return response()->json([
+            'message' => 'Account deleted successfully.'
+        ]);
+    }
+
 }
