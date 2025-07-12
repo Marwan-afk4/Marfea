@@ -203,4 +203,6 @@ Route::middleware(['auth:sanctum','IsUser'])->group(function () {
 
 //Jobs
     Route::get('/user/getJobs',[JobsController::class,'getAllJobs']);
+    Route::post('/user/job-search',[JobsController::class,'jobSearch']);
+    Route::get('/user/jobfilterids',[JobsController::class,'getIdsForJobSearch']);
 });
