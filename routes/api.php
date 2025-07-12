@@ -189,5 +189,6 @@ Route::middleware(['auth:sanctum','IsUser'])->group(function () {
 //Profile
     Route::get('/user/profile',[ProfileController::class,'getProfileData']);
     Route::put('/user/profile/update',[ProfileController::class,'updateProfileData']);
+    Route::get('/user/specializations/get',[ProfileController::class,'getSpecializations']);
     Route::delete('/user/profile/delete',[ProfileController::class,'deleteAccount']);
 });

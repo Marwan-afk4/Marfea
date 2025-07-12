@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Specialization;
 use App\Models\User;
 use App\trait\ImageUpload;
 use Illuminate\Http\Request;
@@ -100,6 +101,17 @@ class ProfileController extends Controller
         }
     }
 
+    public function getSpecializations()
+    {
+        $specializations = Specialization::where('status', 'active')->get();
+
+        $data =[
+            'specializations'=> $specializations
+        ];
+
+        return response()->json($data);
+    }
+
 
     public function deleteAccount(Request $request)
     {
@@ -114,7 +126,7 @@ class ProfileController extends Controller
         $user->status = 'deleted';
         $user->save();
 
-        $request->user()->tokens()->delete(); 
+        $request->user()->tokens()->delete();
 
         return response()->json([
             'message' => 'Account deleted successfully.'
