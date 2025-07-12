@@ -25,6 +25,9 @@ use App\Http\Controllers\Api\Employeer\JobSuppliersController;
 use App\Http\Controllers\Api\Employeer\LocationController;
 use App\Http\Controllers\Api\Employeer\PaymentController;
 use App\Http\Controllers\Api\Employeer\PaymentMethodController as EmployeerPaymentMethodController;
+use App\Http\Controllers\Api\User\CompanyController as UserCompanyController;
+use App\Http\Controllers\Api\User\DrugsController as UserDrugsController;
+use App\Http\Controllers\Api\User\JobsController;
 use App\Http\Controllers\Api\User\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -191,4 +194,13 @@ Route::middleware(['auth:sanctum','IsUser'])->group(function () {
     Route::put('/user/profile/update',[ProfileController::class,'updateProfileData']);
     Route::get('/user/specializations/get',[ProfileController::class,'getSpecializations']);
     Route::delete('/user/profile/delete',[ProfileController::class,'deleteAccount']);
+
+//Company
+    Route::get('/user/getCompanies',[UserCompanyController::class,'getCompanies']);
+
+//drugs
+    Route::get('/user/getDrugs',[UserDrugsController::class,'getAllDrugs']);
+
+//Jobs
+    Route::get('/user/getJobs',[JobsController::class,'getAllJobs']);
 });
