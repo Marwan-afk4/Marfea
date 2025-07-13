@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Admin\AllCvsController;
 use App\Http\Controllers\Api\Admin\CityController;
 use App\Http\Controllers\Api\Admin\CompanyController;
 use App\Http\Controllers\Api\Admin\CompanyTypeController;
@@ -151,6 +152,9 @@ Route::middleware(['auth:sanctum','IsAdmin'])->group(function () {
 
 //ContactsRequest
     Route::get('/admin/getContactsRequests',[ContactsController::class,'getContacts']);
+
+//AllCvs
+    Route::get('/admin/getAllCvs',[AllCvsController::class,'getAllCvs']);
 });
 
 
