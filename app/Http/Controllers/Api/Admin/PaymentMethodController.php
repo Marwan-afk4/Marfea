@@ -70,7 +70,7 @@ class PaymentMethodController extends Controller
             'phone'=> $request->phone ?? $paymentMethod->phone,
             'account'=> $request->account ?? $paymentMethod->account,
             'status'=> $request->status ?? $paymentMethod->status,
-            'image'=> $this->storeBase64Image($request->image ,'Paymentmethod/images') ?? $paymentMethod->image,
+            'image'=> $request->image ? $this->storeBase64Image($request->image, 'Paymentmethod/images') : $paymentMethod->image,
         ]);
 
         return response()->json([
