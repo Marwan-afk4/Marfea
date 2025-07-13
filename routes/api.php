@@ -154,7 +154,7 @@ Route::middleware(['auth:sanctum','IsAdmin'])->group(function () {
     Route::get('/admin/getContactsRequests',[ContactsController::class,'getContacts']);
 
 //AllCvs
-    Route::get('/admin/get-allcvs',[AllCvsController::class,'getAllCvs']);
+    Route::get('/admin/get-allcvs',[AllCvsController::class,'getAllCv']);
 });
 
 
