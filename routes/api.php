@@ -26,6 +26,7 @@ use App\Http\Controllers\Api\Employeer\JobSuppliersController;
 use App\Http\Controllers\Api\Employeer\LocationController;
 use App\Http\Controllers\Api\Employeer\PaymentController;
 use App\Http\Controllers\Api\Employeer\PaymentMethodController as EmployeerPaymentMethodController;
+use App\Http\Controllers\Api\Employeer\TrackCvApplicationsController;
 use App\Http\Controllers\Api\User\CompanyController as UserCompanyController;
 use App\Http\Controllers\Api\User\ContactUsController;
 use App\Http\Controllers\Api\User\DrugsController as UserDrugsController;
@@ -187,6 +188,9 @@ Route::middleware(['auth:sanctum','IsEmployeer'])->group(function () {
 
 //Zone
     Route::get('/employeer/getZones',[LocationController::class,'getActiveZones']);
+
+//TrackCv
+    Route::get('/employeer/get-trackcvs',[TrackCvApplicationsController::class,'getApplicationsForCompany']);
 });
 
 
