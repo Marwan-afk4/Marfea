@@ -203,6 +203,7 @@ Route::middleware(['auth:sanctum','IsUser'])->group(function () {
 //Company
     Route::get('/user/getCompanies',[UserCompanyController::class,'getCompanies']);
     Route::post('/user/search-company',[UserCompanyController::class,'searchCompanies']);
+    Route::get('/user/get-countries',[UserCompanyController::class,'getCountries']);
 
 //drugs
     Route::get('/user/getDrugs',[UserDrugsController::class,'getAllDrugs']);

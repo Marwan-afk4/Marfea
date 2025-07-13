@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Company;
+use App\Models\Country;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -49,5 +50,16 @@ class CompanyController extends Controller
         return response()->json([
             'companies' => $companies
         ]);
+    }
+
+    public function getCountries()
+    {
+        $countries = Country::where('status','active')->get();
+
+        $data =[
+            'countries'=> $countries
+        ];
+
+        return response()->json($data);
     }
 }
