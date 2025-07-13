@@ -220,4 +220,5 @@ Route::middleware(['auth:sanctum','IsUser'])->group(function () {
 //JobApplication
     Route::post('/user/apply-job',[JobApplicationController::class,'applyToJob']);
     Route::get('/user/get-usercv',[JobApplicationController::class,'getUserCv']);
+    Route::get('/user/my-applications',[JobApplicationController::class,'myApplications']);
 });

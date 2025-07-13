@@ -55,4 +55,23 @@ class JobApplicationController extends Controller
 
         return response()->json($data);
     }
+
+    public function myApplications(Request $request)
+    {
+        $user = $request->user();
+
+        $applications = JobApplication::with([
+            'jobOffer:id,job_titel_id,job_category_id,company_id',
+            'jobOffer.company:id,name,email,phone',
+            'jobOffer.jobTitel:id,name',
+            'jobOffer.jobCategory:id,name',
+        ])
+        ->where('user_id', $user->id)
+        ->orderByDesc('created_at')
+        ->get();
+
+        return response()->json([
+            'applications' => $applications
+        ]);
+    }
 }
