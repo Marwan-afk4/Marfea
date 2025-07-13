@@ -12,7 +12,10 @@ class DrugsController extends Controller
 
     public function getAllDrugs()
     {
-        $drugs = Drug::all();
+        $drugs = Drug::with([
+            'drugCategory:id,name',
+            'company:id,name',
+        ])->get();
 
         $data =[
             'drugs'=> $drugs
