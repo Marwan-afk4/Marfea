@@ -88,7 +88,7 @@ class UserController extends Controller
             'email' => $request->email ?? $user->email,
             'password' => Hash::make($request->password) ?? $user->password,
             'phone' => $request->phone,
-            'image' => $this->storeBase64Image($request->image,'users/images') ?? $user->image,
+            'image' => $request->image ? $this->storeBase64Image($request->image,'users/images') : $user->image,
         ]);
 
         return response()->json([
