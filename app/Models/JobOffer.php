@@ -65,4 +65,9 @@ class JobOffer extends Model
         return $this->belongsTo(JobTitel::class);
     }
 
+    public function jobApplications()
+    {
+        return $this->hasMany(JobApplication::class);
+    }
+
 }

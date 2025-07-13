@@ -88,4 +88,9 @@ class User extends Model
         return $this->hasMany(ContactU::class);
     }
 
+    public function jobApplications()
+    {
+        return $this->hasMany(JobApplication::class);
+    }
+
 }

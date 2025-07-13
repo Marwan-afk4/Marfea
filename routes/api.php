@@ -29,6 +29,7 @@ use App\Http\Controllers\Api\Employeer\PaymentMethodController as EmployeerPayme
 use App\Http\Controllers\Api\User\CompanyController as UserCompanyController;
 use App\Http\Controllers\Api\User\ContactUsController;
 use App\Http\Controllers\Api\User\DrugsController as UserDrugsController;
+use App\Http\Controllers\Api\User\JobApplicationController;
 use App\Http\Controllers\Api\User\JobsController;
 use App\Http\Controllers\Api\User\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -215,4 +216,8 @@ Route::middleware(['auth:sanctum','IsUser'])->group(function () {
 
 //Contact Us
     Route::post('/user/sendMessage',[ContactUsController::class,'contactUs']);
+
+//JobApplication
+    Route::post('/user/apply-job',[JobApplicationController::class,'applyToJob']);
+    Route::get('/user/get-usercv',[JobApplicationController::class,'getUserCv']);
 });
