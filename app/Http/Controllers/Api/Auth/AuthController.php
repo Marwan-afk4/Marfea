@@ -142,6 +142,8 @@ class AuthController extends Controller
     {
         $validation = Validator::make($request->all(), [
             'name' => 'required',
+            'city_id' => 'nullable|exists:cities,id',
+            'country_id' => 'nullable|exists:countries,id',
             'email' => 'required|email|unique:companies,email',
             'phone' => 'nullable|unique:companies,phone',
             'image' => 'nullable',
@@ -159,6 +161,8 @@ class AuthController extends Controller
 
         $company = Company::create([
             'name' => $request->name,
+            'city_id' => $request->city_id,
+            'country_id' => $request->country_id,
             'email' => $request->email,
             'phone' => $request->phone??null,
             'image' => $this->storeBase64Image($request->image??null,'companies/images'),
