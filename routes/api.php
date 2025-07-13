@@ -33,6 +33,7 @@ use App\Http\Controllers\Api\User\DrugsController as UserDrugsController;
 use App\Http\Controllers\Api\User\JobApplicationController;
 use App\Http\Controllers\Api\User\JobsController;
 use App\Http\Controllers\Api\User\ProfileController;
+use App\Http\Controllers\Api\User\SavedJobController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -225,4 +226,9 @@ Route::middleware(['auth:sanctum','IsUser'])->group(function () {
     Route::post('/user/apply-job',[JobApplicationController::class,'applyToJob']);
     Route::get('/user/get-usercv',[JobApplicationController::class,'getUserCv']);
     Route::get('/user/my-applications',[JobApplicationController::class,'myApplications']);
+
+//Save Job
+    Route::post('/user/save-job',[SavedJobController::class,'saveJob']);
+    Route::get('/user/get-saved-jobs',[SavedJobController::class,'listSavedJobs']);
+    Route::delete('/user/delete-saved-job',[SavedJobController::class,'removeJob']);
 });
