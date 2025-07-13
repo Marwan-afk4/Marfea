@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Admin\CityController;
 use App\Http\Controllers\Api\Admin\CompanyController;
 use App\Http\Controllers\Api\Admin\CompanyTypeController;
+use App\Http\Controllers\Api\Admin\ContactsController;
 use App\Http\Controllers\Api\Admin\CountryController;
 use App\Http\Controllers\Api\Admin\DrugCategoryController;
 use App\Http\Controllers\Api\Admin\DrugsController;
@@ -26,6 +27,7 @@ use App\Http\Controllers\Api\Employeer\LocationController;
 use App\Http\Controllers\Api\Employeer\PaymentController;
 use App\Http\Controllers\Api\Employeer\PaymentMethodController as EmployeerPaymentMethodController;
 use App\Http\Controllers\Api\User\CompanyController as UserCompanyController;
+use App\Http\Controllers\Api\User\ContactUsController;
 use App\Http\Controllers\Api\User\DrugsController as UserDrugsController;
 use App\Http\Controllers\Api\User\JobsController;
 use App\Http\Controllers\Api\User\ProfileController;
@@ -143,6 +145,9 @@ Route::middleware(['auth:sanctum','IsAdmin'])->group(function () {
     Route::get('/admin/getRejectedPyament',[PatmentRequestsController::class,'getRejectedPaymentRequests']);
     Route::put('/admin/acceptPendingPyament/{id}',[PatmentRequestsController::class,'acceptPaymentRequests']);
     Route::put('/admin/rejectPendingPyament/{id}',[PatmentRequestsController::class,'rejectPaymentRequests']);
+
+//ContactsRequest
+    Route::get('/admin/getContactsRequests',[ContactsController::class,'getContacts']);
 });
 
 
@@ -205,4 +210,7 @@ Route::middleware(['auth:sanctum','IsUser'])->group(function () {
     Route::get('/user/getJobs',[JobsController::class,'getAllJobs']);
     Route::post('/user/job-search',[JobsController::class,'jobSearch']);
     Route::get('/user/jobfilterids',[JobsController::class,'getIdsForJobSearch']);
+
+//Contact Us
+    Route::post('/user/sendMessage',[ContactUsController::class,'contactUs']);
 });

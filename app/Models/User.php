@@ -83,4 +83,9 @@ class User extends Model
         return $this->hasOne(Subscription::class, 'employee_id')->where('status', 'active');
     }
 
+    public function contactUs()
+    {
+        return $this->hasMany(ContactU::class);
+    }
+
 }
