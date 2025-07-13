@@ -76,7 +76,7 @@ class DrugsController extends Controller
         $drug->user_id = $user->id ?? $drug->user_id;
         $drug->name = $request->name ?? $drug->name;
         $drug->description = $request->description ?? $drug->description;
-        $drug->image = $this->storeBase64Image($request->image, 'drugs/images') ?? $drug->image;
+        $drug->image = $request->image ? $this->storeBase64Image($request->image, 'drugs/images') : $drug->image;
 
         $drug->save();
 
