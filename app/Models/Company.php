@@ -13,6 +13,8 @@ class Company extends Model
 
     protected $fillable = [
         'user_id',
+        'city_id',
+        'country_id',
         'name',
         'phone',
         'email',
@@ -69,6 +71,16 @@ class Company extends Model
     public function drugs()
     {
         return $this->hasMany(Drug::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
     }
 
 }

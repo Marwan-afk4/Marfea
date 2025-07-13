@@ -30,6 +30,8 @@ class CompanyController extends Controller
     {
         $validation = Validator::make($request->all(), [
             'name' => 'required',
+            'city_id' => 'required|exists:cities,id',
+            'country_id' => 'required|exists:countries,id',
             'email' => 'required|email|unique:companies,email',
             'phone' => 'nullable|unique:companies,phone',
             'image' => 'nullable',
@@ -50,6 +52,8 @@ class CompanyController extends Controller
 
         $company = Company::create([
             'name' => $request->name,
+            'city_id' =>$request->city_id,
+            'country_id'=> $request->country_id,
             'email' => $request->email,
             'phone' => $request->phone??null,
             'image' => $this->storeBase64Image($request->image??null,'companies/images'),
@@ -82,9 +86,11 @@ class CompanyController extends Controller
         $company = Company::find($id);
 
         $validation = Validator::make($request->all(), [
-            'name' => 'sometimes|required|string',
-            'email' => 'sometimes|required|email|unique:companies,email,' . $company->id,
-            'phone' => 'sometimes|nullable|unique:companies,phone,' . $company->id,
+            'name' => 'nullable|string',
+            'city_id' => 'nullable|exists:cities,id',
+            'country_id'=> 'nullable|exists:countries,id',
+            'email' => 'nullable|email|unique:companies,email,' . $company->id,
+            'phone' => 'nullable|nullable|unique:companies,phone,' . $company->id,
             'image' => 'nullable',
             'location_link' => 'nullable|string',
             'description' => 'nullable|string',
@@ -104,6 +110,8 @@ class CompanyController extends Controller
         // Update company fields
         $company->update([
             'name' => $request->name ?? $company->name,
+            'city_id' => $request->city_id ?? $company->city_id,
+            'country_id'=> $request->country_id ?? $company->country_id,
             'email' => $request->email ?? $company->email,
             'phone' => $request->phone ?? $company->phone,
             'image' => $request->image ? $this->storeBase64Image($request->image, 'companies/images') : $company->image,
