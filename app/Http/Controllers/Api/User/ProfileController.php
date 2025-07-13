@@ -38,7 +38,7 @@ class ProfileController extends Controller
             'phone' => 'nullable|string',
             'age' =>'required|integer',
             'password' => 'nullable|min:6|confirmed',
-            'cv_file' => 'required|string',
+            'cv_file' => 'nullable|string',
             'user_address' => 'nullable|string',
             'specialization' => 'nullable|array|min:1',
             'specialization.*' => 'exists:specializations,id',
