@@ -93,4 +93,10 @@ class User extends Model
         return $this->hasMany(JobApplication::class);
     }
 
+    public function savedJobs()
+    {
+        return $this->hasMany(SavedJob::class);
+    }
+
+
 }

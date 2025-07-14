@@ -15,8 +15,14 @@ class JobsController extends Controller
 {
 
 
-    public function getAllJobs()
+    public function getAllJobs(Request $request)
     {
+        $user = $request->user();
+
+        $savedJobIds = $user
+            ? $user->savedJobs()->pluck('job_offer_id')->toArray()
+            : [];
+
         $jobs = JobOffer::with([
             'city:id,name,country_id',
             'city.country:id,name',
@@ -25,14 +31,15 @@ class JobsController extends Controller
             'jobCategory:id,name',
             'jobTitel:id,name',
         ])
-        ->get();
+        ->get()
+        ->map(function ($job) use ($savedJobIds) {
+            $job->is_saved = in_array($job->id, $savedJobIds) ? 1 : 0;
+            return $job;
+        });
 
-
-        $data =[
-            'jobs'=> $jobs
-        ];
-
-        return response()->json($data);
+        return response()->json([
+            'jobs' => $jobs
+        ]);
     }
 
     public function jobSearch(Request $request)
