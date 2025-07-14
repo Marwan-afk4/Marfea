@@ -46,6 +46,7 @@ class AuthController extends Controller
             'email_code' => $code,
             'email_verified' => 'unverified',
             'role'=>'user',
+            'status'=>'active'
         ]);
 
         return response()->json(['message'=>'Go and verify your email'],200);
