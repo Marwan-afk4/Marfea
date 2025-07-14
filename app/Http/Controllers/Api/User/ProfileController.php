@@ -117,16 +117,10 @@ class ProfileController extends Controller
     {
         $user = $request->user();
 
-        if ($user->status === 'deleted') {
-            return response()->json([
-                'message' => 'Account already deleted.'
-            ], 400);
-        }
-
-        $user->status = 'deleted';
-        $user->save();
-
         $request->user()->tokens()->delete();
+
+        $user->delete();
+
 
         return response()->json([
             'message' => 'Account deleted successfully.'
