@@ -12,7 +12,8 @@ class SavedJobController extends Controller
     public function saveJob(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            'job_offer_id' => 'required|exists:job_offers,id'
+            'job_offer_id' => 'required|exists:job_offers,id',
+            'key' => 'required|in:0,1' 
         ]);
 
         if ($validation->fails()) {
@@ -22,40 +23,31 @@ class SavedJobController extends Controller
         }
 
         $user = $request->user();
+        $jobOfferId = $request->job_offer_id;
 
-        $saved = SavedJob::firstOrCreate([
-            'user_id' => $user->id,
-            'job_offer_id' => $request->job_offer_id,
-        ]);
+        if ($request->key == 1) {
+            $saved = SavedJob::firstOrCreate([
+                'user_id' => $user->id,
+                'job_offer_id' => $jobOfferId,
+            ]);
 
-        return response()->json([
-            'message' => 'Job saved successfully',
-            'saved_job' => $saved
-        ]);
-    }
-
-    public function removeJob(Request $request)
-    {
-        $validation = Validator::make($request->all(), [
-            'job_offer_id' => 'required|exists:job_offers,id'
-        ]);
-
-        if ($validation->fails()) {
             return response()->json([
-                'errors' => $validation->errors(),
-            ], 422);
+                'message' => 'Job saved successfully.',
+                'status' => 1,
+                'saved_job' => $saved
+            ]);
+        } else {
+            $deleted = SavedJob::where('user_id', $user->id)
+                ->where('job_offer_id', $jobOfferId)
+                ->delete();
+
+            return response()->json([
+                'message' => $deleted ? 'Job unsaved successfully.' : 'Job was not saved.',
+                'status' => 0
+            ]);
         }
-
-        $user = $request->user();
-
-        $deleted = SavedJob::where('user_id', $user->id)
-            ->where('job_offer_id', $request->job_offer_id)
-            ->delete();
-
-        return response()->json([
-            'message' => $deleted ? 'Job removed from saved list' : 'Job not found in saved list'
-        ]);
     }
+
 
     public function listSavedJobs(Request $request)
     {

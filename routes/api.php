@@ -234,5 +234,4 @@ Route::middleware(['auth:sanctum','IsUser'])->group(function () {
 //Save Job
     Route::post('/user/save-job',[SavedJobController::class,'saveJob']);
     Route::get('/user/get-saved-jobs',[SavedJobController::class,'listSavedJobs']);
-    Route::delete('/user/delete-saved-job',[SavedJobController::class,'removeJob']);
 });
